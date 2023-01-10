@@ -47,5 +47,16 @@ def getusers():
 
     return data
 
+
+@app.route('/delete/<id>',methods = ['POST', 'GET','DELETE'])
+@cross_origin(supports_credentials=True)
+def deleteuser(id):
+    print("hitted delete",id)
+    query="DELETE FROM EMPLOYEEDATA WHERE ID = %s;"
+    values=(id,)
+    cursor.execute(query,values)
+    db.commit()
+    return {'message': 'done!!!'}
+
 if __name__ == '__main__':
     app.run(debug=True)
